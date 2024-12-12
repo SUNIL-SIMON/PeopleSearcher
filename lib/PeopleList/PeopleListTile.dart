@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'ImageDetailView.dart';
 import 'PeopleViewModel.dart';
 import 'PersonModel.dart';
 
@@ -18,6 +19,7 @@ class PeopleListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final image = viewModel.getImage(person.pictureThumbnailUrl);
 
     return Card(
       elevation: 4,
@@ -36,12 +38,17 @@ class PeopleListTile extends StatelessWidget {
           ),
           child: GestureDetector(
             onTap: () {
-              //OPEN IMAGE DETAIL VIEW
+              viewModel.routeTo(context,ImageDetailView(person: person, viewModel: viewModel));
             },
             child: CircleAvatar(
               backgroundColor: Colors.grey[200],
               radius: 30,
-              backgroundImage: null
+              backgroundImage: image == null
+                  ? null
+                  : MemoryImage(image),
+              child: image == null
+                  ? const CircularProgressIndicator()
+                  : null,
             ),
           ),
         ),

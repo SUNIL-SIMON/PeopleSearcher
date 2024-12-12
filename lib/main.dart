@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'ImagesHandler/ImagesHandler.dart';
 import 'MyApp.dart';
 import 'PeopleList/PeopleListNetworkRepository.dart';
 import 'PeopleList/PeopleViewModel.dart';
@@ -11,5 +12,5 @@ void main() {
 }
 
 class PeopleListDependencyProvider {
-  final peopleListMockViewModel = PeopleViewModel(PeopleListNetworkRepository(URLNetworkConstants()));
+  final peopleListMockViewModel = PeopleViewModel(PeopleListNetworkRepository(URLNetworkConstants()),ImagesHandler());
 }

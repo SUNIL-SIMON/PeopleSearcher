@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../ImagesHandler/ImagesHandler.dart';
 import 'PeopleListRepository.dart';
 import 'PersonModel.dart';
 
@@ -14,8 +15,9 @@ class PeopleViewModel extends ChangeNotifier {
   int _page = 1;
   String _searchQuery = '';
 
+  final ImagesHandler _imagesHandler;
 
-  PeopleViewModel(this._peopleRepository){
+  PeopleViewModel(this._peopleRepository,this._imagesHandler,){
     loadPeople();
   }
 
@@ -69,7 +71,10 @@ class PeopleViewModel extends ChangeNotifier {
 
   Uint8List? getImage(String url)
   {
-    return null;
+    Uint8List? image = _imagesHandler.getImage(url,(image){
+      notifyListeners();
+    });
+    return image;
   }
 
 }
