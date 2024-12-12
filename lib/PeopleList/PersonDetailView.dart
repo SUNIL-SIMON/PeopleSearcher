@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../Appearance/Appearance.dart';
 import 'ImageDetailView.dart';
 import 'PeopleViewModel.dart';
 import 'PersonModel.dart';
@@ -20,10 +21,15 @@ class PersonDetailView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Person's Details"),
+        title: const Text("Details",style: TextStyle(
+          fontWeight: FontWeight.w600, // Semi-bold font weight
+        ),
+        ),
+        backgroundColor: Appearance().primaryColor,
       ),
       body: SingleChildScrollView(
         child: Card(
+          color: Appearance().primaryColor,
           elevation: 4,
           margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
           child: Padding(
@@ -39,7 +45,7 @@ class PersonDetailView extends StatelessWidget {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: Colors.blue,
+                        color: Appearance().borderColor,
                         width: 2,
                       ),
                     ),
@@ -52,7 +58,7 @@ class PersonDetailView extends StatelessWidget {
                             viewModel.routeTo(context,ImageDetailView(person: person, viewModel: viewModel));
                           },
                           child: CircleAvatar(
-                            backgroundColor: Colors.grey[200],
+                            backgroundColor:Appearance().primaryColor,
                             radius: 75,
                             backgroundImage: image == null
                                 ? null

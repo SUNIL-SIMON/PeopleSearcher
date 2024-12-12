@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:peoplesearcher/Appearance/Appearance.dart';
 import 'package:provider/provider.dart';
 import 'PeopleViewModel.dart';
 import 'PersonModel.dart';
@@ -18,7 +19,10 @@ class ImageDetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Full Image")),
+      appBar: AppBar(
+          title: Text(person.name),
+          backgroundColor: Appearance().primaryColor,
+      ),
       body: Center(
         child: Consumer<PeopleViewModel>(
           builder: (context, viewModel, child) {

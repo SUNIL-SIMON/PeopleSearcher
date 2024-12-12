@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../Appearance/Appearance.dart';
 import 'ImageDetailView.dart';
 import 'PeopleViewModel.dart';
 import 'PersonModel.dart';
@@ -38,6 +39,7 @@ class _PeopleListTileState extends State<PeopleListTile> {
     final image = widget.viewModel.getImage(widget.person.pictureThumbnailUrl);
 
     return Card(
+      color: Appearance().primaryColor,
       elevation: 4,
       margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
       child: ListTile(
@@ -48,7 +50,7 @@ class _PeopleListTileState extends State<PeopleListTile> {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.all(
-              color: Colors.blue,
+              color: Appearance().borderColor,
               width: 2,
             ),
           ),
@@ -60,7 +62,7 @@ class _PeopleListTileState extends State<PeopleListTile> {
                       person: widget.person, viewModel: widget.viewModel));
             },
             child: CircleAvatar(
-              backgroundColor: Colors.grey[200],
+              backgroundColor: Appearance().primaryColor,
               radius: 30,
               backgroundImage: image == null ? null : MemoryImage(image),
               child: image == null
