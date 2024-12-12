@@ -26,6 +26,7 @@ Testing
 - Unit testing : Written ‘SearchPeople()’ unit testing.
 
 Some extra things to note
-- All images data downloaded will remain cached for reuse without having being to download same image multiple times, as and when the element moves away and back in during scrolling. Careful release or flushing of those images is also handled when the pool threshold is reached having the oldest image to be flushed from memory and newest will be inserted.
+- Images will be downloaded only for those needed at present, as in when the user is watching at it and not all.
+- All images downloaded will remain cached for reuse without having being to download same image multiple times, as and when the element moves away and back in during scrolling. Careful release or flushing of those images is also handled when the pool threshold is reached having the oldest image to be flushed from memory and newest will be inserted. large image and thumbnail image are considered as seperate images in cache and similarly sperately downloaded only when required..
 - Separate Appearance class is present to control the theme/color of the app centralised.
 
