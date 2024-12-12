@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import 'PeopleListTile.dart';
 import 'PeopleViewModel.dart';
+import 'PersonDetailView.dart';
 
 class PeopleListView extends StatelessWidget {
   PeopleListView({super.key});
@@ -62,6 +63,7 @@ class PeopleListView extends StatelessWidget {
                         person: person,
                         onTap: () {
                           //OPEN CARD DETAIL VIEW
+                          viewModel.routeTo(context, PersonDetailView(person: person, viewModel: viewModel,));
                         }, viewModel: viewModel,
                       );
                     },

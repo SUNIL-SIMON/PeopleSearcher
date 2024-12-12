@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -65,6 +67,10 @@ class PeopleViewModel extends ChangeNotifier {
     );
   }
 
+  Uint8List? getImage(String url)
+  {
+    return null;
+  }
 
 }
 
