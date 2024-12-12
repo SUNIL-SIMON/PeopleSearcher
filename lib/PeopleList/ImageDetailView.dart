@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'PeopleViewModel.dart';
 import 'PersonModel.dart';
 
+
 class ImageDetailView extends StatelessWidget {
   final PersonModel person;
   final PeopleViewModel viewModel;
@@ -25,11 +26,16 @@ class ImageDetailView extends StatelessWidget {
 
             return image == null
                 ? const CircularProgressIndicator()
-                : Image.memory(
-              image,
-              fit: BoxFit.contain,
-              width: double.infinity,
-              height: double.infinity,
+                : InteractiveViewer(
+              panEnabled: true, // Enables panning
+              minScale: 0.5, // Minimum zoom scale
+              maxScale: 4.0, // Maximum zoom scale
+              child: Image.memory(
+                image,
+                fit: BoxFit.contain,
+                width: double.infinity,
+                height: double.infinity,
+              ),
             );
           },
         ),

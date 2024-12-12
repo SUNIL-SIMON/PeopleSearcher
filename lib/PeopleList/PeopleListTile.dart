@@ -1,11 +1,10 @@
-import 'dart:ui';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'ImageDetailView.dart';
 import 'PeopleViewModel.dart';
 import 'PersonModel.dart';
 
-class PeopleListTile extends StatelessWidget {
+class PeopleListTile extends StatefulWidget {
   final PersonModel person;
   final VoidCallback onTap;
   final PeopleViewModel viewModel;
@@ -18,8 +17,25 @@ class PeopleListTile extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<PeopleListTile> createState() => _PeopleListTileState();
+}
+
+class _PeopleListTileState extends State<PeopleListTile> {
+  @override
+  void initState() {
+    super.initState();
+    debugPrint("PeopleListTile for ${widget.person.name} initialized");
+  }
+
+  @override
+  void dispose() {
+    debugPrint("PeopleListTile for ${widget.person.name} disposed");
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final image = viewModel.getImage(person.pictureThumbnailUrl);
+    final image = widget.viewModel.getImage(widget.person.pictureThumbnailUrl);
 
     return Card(
       elevation: 4,
@@ -38,14 +54,15 @@ class PeopleListTile extends StatelessWidget {
           ),
           child: GestureDetector(
             onTap: () {
-              viewModel.routeTo(context,ImageDetailView(person: person, viewModel: viewModel));
+              widget.viewModel.routeTo(
+                  context,
+                  ImageDetailView(
+                      person: widget.person, viewModel: widget.viewModel));
             },
             child: CircleAvatar(
               backgroundColor: Colors.grey[200],
               radius: 30,
-              backgroundImage: image == null
-                  ? null
-                  : MemoryImage(image),
+              backgroundImage: image == null ? null : MemoryImage(image),
               child: image == null
                   ? const CircularProgressIndicator()
                   : null,
@@ -53,7 +70,7 @@ class PeopleListTile extends StatelessWidget {
           ),
         ),
         title: Text(
-          person.name,
+          widget.person.name,
           style: Theme.of(context).textTheme.headline6?.copyWith(
             fontWeight: FontWeight.bold,
           ),
@@ -61,12 +78,12 @@ class PeopleListTile extends StatelessWidget {
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Email: ${person.email}', style: TextStyle(fontSize: 14)),
-            Text('Phone: ${person.phone}', style: TextStyle(fontSize: 14)),
+            Text('Email: ${widget.person.email}', style: TextStyle(fontSize: 14)),
+            Text('Phone: ${widget.person.phone}', style: TextStyle(fontSize: 14)),
           ],
         ),
         trailing: Icon(Icons.arrow_forward_ios),
-        onTap: onTap,
+        onTap: widget.onTap,
       ),
     );
   }
