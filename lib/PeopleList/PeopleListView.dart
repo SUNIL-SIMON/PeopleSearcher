@@ -37,10 +37,10 @@ class PeopleListView extends StatelessWidget {
                     controller: _searchController,
                     decoration: InputDecoration(
                       hintText: 'Search People...',
-                      prefixIcon: const Icon(Icons.search, color: Colors.white), // Optional, for contrast
+                      prefixIcon: const Icon(Icons.search, color: Colors.black), // Optional, for contrast
                       suffixIcon: _searchController.text.isNotEmpty
                           ? IconButton(
-                        icon: const Icon(Icons.clear, color: Colors.white),
+                        icon: const Icon(Icons.clear, color: Colors.black),
                         onPressed: () {
                           _searchController.clear();
                           viewModel.searchPeople('');
@@ -53,7 +53,7 @@ class PeopleListView extends StatelessWidget {
                         borderSide: BorderSide.none,
                       ),
                     ),
-                    style: const TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.black),
                     onChanged: (query) {
                       viewModel.searchPeople(query);
                     },
