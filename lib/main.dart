@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'MyApp.dart';
+import 'PeopleList/PeopleListNetworkRepository.dart';
 import 'PeopleList/PeopleViewModel.dart';
+import 'ServerRequests/URLNetworkConstants.dart';
 import 'Testing/PeopleListMockRepository.dart';
 
 void main() {
@@ -9,5 +11,5 @@ void main() {
 }
 
 class PeopleListDependencyProvider {
-  final peopleListMockViewModel = PeopleViewModel(PeopleListMockRepository());
+  final peopleListMockViewModel = PeopleViewModel(PeopleListNetworkRepository(URLNetworkConstants()));
 }

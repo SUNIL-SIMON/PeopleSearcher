@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'PeopleListTile.dart';
 import 'PeopleViewModel.dart';
 
 class PeopleListView extends StatelessWidget {
@@ -57,11 +58,11 @@ class PeopleListView extends StatelessWidget {
 
                       final person = viewModel.filteredPeople[index];
 
-                      return Text(
-                        person.name,
-                        style: Theme.of(context).textTheme.headline6?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                      return PeopleListTile(
+                        person: person,
+                        onTap: () {
+                          //OPEN CARD DETAIL VIEW
+                        }, viewModel: viewModel,
                       );
                     },
                   ),
