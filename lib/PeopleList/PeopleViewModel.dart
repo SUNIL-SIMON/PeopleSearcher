@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../ExceptionHandler/AppException.dart';
 import '../ImagesHandler/ImagesHandler.dart';
 import 'PeopleListRepository.dart';
 import 'PersonModel.dart';
@@ -16,8 +17,9 @@ class PeopleViewModel extends ChangeNotifier {
   String _searchQuery = '';
 
   final ImagesHandler _imagesHandler;
+  final Function(String message)? onError;
 
-  PeopleViewModel(this._peopleRepository,this._imagesHandler,){
+  PeopleViewModel(this._peopleRepository,this._imagesHandler,{this.onError}){
     loadPeople();
   }
 
@@ -34,12 +36,14 @@ class PeopleViewModel extends ChangeNotifier {
     notifyListeners();
 
     try {
-      final newPeople = await _peopleRepository.fetchList(_page);
+      final newPeople = await _peopleRepository.fetchList(_page,onError);
       people.addAll(newPeople);
       searchPeople(_searchQuery);
       _page++;
     } catch (e) {
-      print("THROW ERROR");
+      if (onError != null) {
+        onError!(AppException.handleException(e, 'Error loading people').alertmessage);
+      }
     }
 
     _isLoading = false;
@@ -71,7 +75,7 @@ class PeopleViewModel extends ChangeNotifier {
 
   Uint8List? getImage(String url)
   {
-    Uint8List? image = _imagesHandler.getImage(url,(image){
+    Uint8List? image = _imagesHandler.getImage(url,onError,(image){
       notifyListeners();
     });
     return image;

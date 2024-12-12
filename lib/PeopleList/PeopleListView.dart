@@ -62,7 +62,6 @@ class PeopleListView extends StatelessWidget {
                       return PeopleListTile(
                         person: person,
                         onTap: () {
-                          //OPEN CARD DETAIL VIEW
                           viewModel.routeTo(context, PersonDetailView(person: person, viewModel: viewModel,));
                         }, viewModel: viewModel,
                       );

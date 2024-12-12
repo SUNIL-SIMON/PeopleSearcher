@@ -11,6 +11,32 @@ class MyApp extends StatelessWidget {
 
   MyApp({super.key,required this.peopleListViewModel});
 
+  static bool _isDialogShowing = false;
+
+  static void showErrorDialog(String message) {
+    if (_isDialogShowing) return;
+    _isDialogShowing = true;
+    showDialog(
+      context: navigatorKey.currentContext!,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Something went wrong"),
+          content: Text(message),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                _isDialogShowing = false;
+              },
+              child: const Text("OK"),
+            ),
+          ],
+        );
+      },
+    ).then((_) {
+      _isDialogShowing = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

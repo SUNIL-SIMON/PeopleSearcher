@@ -158,3 +158,4 @@ class PersonDetailView extends StatelessWidget {
     );
   }
 }
+

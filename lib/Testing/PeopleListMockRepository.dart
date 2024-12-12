@@ -2,7 +2,7 @@ import 'package:peoplesearcher/PeopleList/PeopleListRepository.dart';
 import 'package:peoplesearcher/PeopleList/PersonModel.dart';
 
 class PeopleListMockRepository extends PeopleListRepository{
-  Future<List<PersonModel>> fetchList(int page) async {
+  Future<List<PersonModel>> fetchList(int page,Function(String errorMessage)? onError) async {
     await Future.delayed(Duration(seconds: 2)); // Simulate network delay
     PersonModel dummyPerson = PersonModel(
       gender: 'female',

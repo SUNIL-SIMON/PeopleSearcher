@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import '../ExceptionHandler/AppException.dart';
 import '../ServerRequests/ServerRequestHandler.dart';
 import 'ImageModel.dart';
 
@@ -17,7 +18,7 @@ class ImagesHandler {
     return _instance;
   }
 
-  Uint8List? getImage(String url,Function(bool success) onComplete) {
+  Uint8List? getImage(String url,Function(String errorMessage)? onError,Function(bool success) onComplete) {
     if(imagesCache.containsKey(url)) {
       if (imagesCache[url]?.imageApiStatus == ImageApiStatus.APICALLEDWAITING) {
         return null;
@@ -41,7 +42,9 @@ class ImagesHandler {
           onComplete(true);
         }
         else{
-          print("THROW ERROR");
+          if (onError != null) {
+            onError!(AppException.handleException(error,null).alertmessage);
+          }
         }
       });
       return null;
